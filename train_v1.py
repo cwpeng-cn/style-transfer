@@ -32,7 +32,7 @@ optimizer = optim.LBFGS([input_image.requires_grad_()])
 
 print("Start training......")
 step = [0]
-while step[0] < 300:
+while step[0] < 600:
     def closure():
         input_image.data.clamp_(0, 1)
         optimizer.zero_grad()
