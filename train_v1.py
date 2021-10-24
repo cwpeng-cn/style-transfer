@@ -30,7 +30,7 @@ optimizer = optim.SGD([input_image.requires_grad_()], lr=0.0001)
 print("Start training......")
 
 step = 0
-while step < 300:
+while step < 3000:
     input_image.data.clamp_(0, 1)
     optimizer.zero_grad()
     net(input_image)
