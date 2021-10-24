@@ -7,6 +7,7 @@ from losses import ContentLoss, StyleLoss
 class Transfer(nn.Module):
     def __init__(self, style_img, content_img, device):
         super(Transfer, self).__init__()
+        self.device = device
         self.style_img = style_img
         self.content_img = content_img
         self.content_layers = ['conv_4']
@@ -15,7 +16,6 @@ class Transfer(nn.Module):
         self.style_losses = []
         basenet = torchvision.models.vgg19(pretrained=True).features.to(device)
         self.basenet = self.build_model(basenet)
-        self.device = device
 
     def build_model(self, net):
         i = 1
