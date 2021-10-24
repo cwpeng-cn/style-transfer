@@ -25,7 +25,7 @@ content_losses = model.content_losses
 input_image = content_image.clone().to(device)
 
 # define optimizer
-optimizer = optim.LBFGS([input_image.requires_grad_()])
+optimizer = optim.SGD([input_image.requires_grad_()])
 
 print("Start training......")
 
