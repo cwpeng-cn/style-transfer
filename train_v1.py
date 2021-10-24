@@ -9,7 +9,7 @@ device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
 CONTENT_IMAGE_PATH = "./images/content.png"
 STYLE_IMAGE_PATH = "./images/style.png"
 
-h, w = get_image_shape(CONTENT_IMAGE_PATH)
+w, h = get_image_shape(CONTENT_IMAGE_PATH)
 new_h, new_w = 256, int(256 / h * w)
 
 content_image = get_image(CONTENT_IMAGE_PATH, new_h, new_w).to(device)
