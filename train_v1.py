@@ -24,15 +24,13 @@ style_losses = model.style_losses
 content_losses = model.content_losses
 
 # 定义输入
-# input_image = torch.randn(content_image.data.size()).cuda()
-input_image = content_image.clone().to(device)
+input_image = torch.randn(content_image.data.size()).cuda()
+# input_image = content_image.clone().to(device)
 
 # define optimizer
 optimizer = optim.LBFGS([input_image.requires_grad_()])
 
 print("Start training......")
-# We use arrays instead of single variables,because use variable will lead a mistake
-# (When passing parameters, the array passes the memory address)
 step = [0]
 while step[0] < 300:
     def closure():
