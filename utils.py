@@ -6,7 +6,7 @@ from torchvision import transforms
 
 def get_image_shape(path):
     image = Image.open(path)
-    return image.shape
+    return image.size
 
 
 def get_image(path, h, w):
