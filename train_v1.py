@@ -10,7 +10,7 @@ CONTENT_IMAGE_PATH = "./images/content.png"
 STYLE_IMAGE_PATH = "./images/style.png"
 
 h, w = get_image_shape(CONTENT_IMAGE_PATH)
-new_h, new_w = 256, h // 256 * w
+new_h, new_w = 256, 256 // h * w
 
 content_image = get_image(CONTENT_IMAGE_PATH, new_h, new_w).to(device)
 style_image = get_image(STYLE_IMAGE_PATH, new_h, new_w).to(device)
@@ -56,5 +56,5 @@ while step[0] < 300:
     optimizer.step(closure)
 input_img = input_image.clamp(0, 1)
 show_image(input_img)
-save_image(input_img, CONTENT_IMAGE_PATH.split("/")[-1])
+save_image(input_img, "output")
 print('End of the training')
