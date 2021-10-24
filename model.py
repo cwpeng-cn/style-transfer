@@ -15,10 +15,11 @@ class Transfer(nn.Module):
         self.style_losses = []
         basenet = torchvision.models.vgg19(pretrained=True).features.to(device)
         self.basenet = self.build_model(basenet)
+        self.device = device
 
     def build_model(self, net):
         i = 1
-        normalization = Normalization(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225))
+        normalization = Normalization(mean=(0.485, 0.456, 0.406), std=(0.229, 0.224, 0.225), device=self.device)
         model = nn.Sequential(normalization)
 
         for layer in list(net):
@@ -57,10 +58,10 @@ class Transfer(nn.Module):
 
 
 class Normalization(nn.Module):
-    def __init__(self, mean, std):
+    def __init__(self, mean, std, device):
         super(Normalization, self).__init__()
-        self.mean = torch.tensor(mean).view(-1, 1, 1)
-        self.std = torch.tensor(std).view(-1, 1, 1)
+        self.mean = torch.tensor(mean).view(-1, 1, 1).to(device)
+        self.std = torch.tensor(std).view(-1, 1, 1).to(device)
 
     def forward(self, img):
         return (img - self.mean) / self.std
