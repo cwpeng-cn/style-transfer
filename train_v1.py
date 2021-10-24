@@ -1,7 +1,7 @@
 import torch
 from torch import optim
 from model import Transfer
-from utils import get_image, show_image, save_image
+from utils import get_image_shape, get_image, show_image, save_image
 
 device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
 
@@ -9,8 +9,11 @@ device = 'cuda:0' if torch.cuda.is_available() else 'cpu'
 CONTENT_IMAGE_PATH = "./images/content.png"
 STYLE_IMAGE_PATH = "./images/style.png"
 
-content_image = get_image(CONTENT_IMAGE_PATH, 256).to(device)
-style_image = get_image(STYLE_IMAGE_PATH, 256).to(device)
+h, w = get_image_shape(CONTENT_IMAGE_PATH)
+new_h, new_w = 256, h // 256 * w
+
+content_image = get_image(CONTENT_IMAGE_PATH, new_h, new_w).to(device)
+style_image = get_image(STYLE_IMAGE_PATH, new_h, new_w).to(device)
 
 # 加载模型
 model = Transfer(style_image, content_image, device)

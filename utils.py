@@ -4,8 +4,13 @@ from PIL import Image
 from torchvision import transforms
 
 
-def get_image(path, size):
-    m_trans = transforms.Compose([transforms.Resize((size, size)), transforms.ToTensor()])
+def get_image_shape(path):
+    image = Image.open(path)
+    return image.shape
+
+
+def get_image(path, h, w):
+    m_trans = transforms.Compose([transforms.Resize((h, w)), transforms.ToTensor()])
     image = Image.open(path)
     image = m_trans(image)
     image = image.unsqueeze(0)
