@@ -51,7 +51,7 @@ while step[0] < 300:
 
 
     optimizer.step(closure)
-input_img = input_image.cpu().dataclamp_(0, 1)
+input_img = input_image.cpu().numpy().dataclamp_(0, 1)
 show_image(input_img)
 save_image(input_img, CONTENT_IMAGE_PATH.split("/")[-1])
 print('End of the training')
